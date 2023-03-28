@@ -19,7 +19,23 @@ namespace Flashcards
                 + "---------------";
 
             Console.WriteLine(prompt);
-            Console.WriteLine(UserInput.GetNumberInput(new int[] { 2, 3, 4 }));
+            var userInput = UserInput.GetNumberInput(new int[]{ 1, 2, 3, 4 });
+
+            switch(userInput)
+            {
+                case 1:
+                    FlashcardManager.ManageStacks();
+                    break;
+                case 2:
+                    FlashcardManager.ManageCards();
+                    break;
+                case 3:
+                    FlashcardManager.Study();
+                    break;
+                case 4:
+                    Environment.Exit(0);
+                    break;
+            }
         }
     }
 }
