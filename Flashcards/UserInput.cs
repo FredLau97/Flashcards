@@ -4,13 +4,12 @@
     {
         public static string GetTextInput<T>(T[] validInputs)
         {
-            Console.WriteLine("Enter your choice: ");
+            Console.Write("Enter your choice: ");
             var userInput = Console.ReadLine();
            
             if (!ValidateInput(userInput, validInputs))
             {
-                DisplayErrorMessage($"Input '{userInput}' is not valid in this context. Please select either of these inputs: {Formatter.FormatInputCollection(validInputs)}.\n" +
-                $"Alternatively, enter Q to return to the main menu");
+                DisplayErrorMessage($"Input '{userInput}' is not valid in this context. Please select either of these inputs: {Formatter.FormatInputCollection(validInputs)}.\n");
 
                 userInput = GetTextInput(validInputs);
             }
@@ -18,17 +17,16 @@
             return userInput;
         }
 
-        public static int GetNumberInput<T>(T[] validInputs)
+        public static int GetNumberInput(int[] validInputs)
         {
-            Console.WriteLine("Enter your choice: ");
+            Console.Write("Enter your choice: ");
             var userInput = Console.ReadLine();
 
             if (!ValidateInput(userInput, validInputs))
             {
-                DisplayErrorMessage($"Input '{userInput}' is not valid in this context. Please select either of these inputs: {Formatter.FormatInputCollection(validInputs)}.\n" +
-                $"Alternatively, enter Q to return to the main menu");
+                DisplayErrorMessage($"Input '{userInput}' is not valid in this context. Please select either of these inputs: {Formatter.FormatInputCollection(validInputs)}.\n");
 
-                userInput = GetTextInput(validInputs);
+                userInput = GetNumberInput(validInputs).ToString();
             }
 
             return Convert.ToInt32(userInput);
@@ -39,8 +37,9 @@
             return validInputs.Select(item => item.ToString()).ToArray().Contains(input);
         }
 
-        private static void DisplayErrorMessage(string message)
+        private static void DisplayErrorMessage(string message, bool canReturnToMainManu = false)
         {
+            if (canReturnToMainManu) message += $"Alternatively, enter Q to return to the main menu\n";
             Console.WriteLine(message);
         }
     }
