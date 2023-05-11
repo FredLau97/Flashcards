@@ -1,6 +1,4 @@
 ﻿using Flashcards;
 
-//Database.OpenConnection();
-//Database.CloseConnection();
-
-MainMenu.Display();
+MainMenu mainMenu = new MainMenu();
+mainMenu.Display();

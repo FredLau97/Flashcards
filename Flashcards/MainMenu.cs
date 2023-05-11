@@ -8,7 +8,16 @@ namespace Flashcards
 {
     internal class MainMenu
     {
-        public static void Display()
+        private FlashcardManager _flashcardManager;
+        private UserInput _userInput;
+
+        public MainMenu()
+        {
+            _flashcardManager = new FlashcardManager(this);
+            _userInput = new UserInput();
+        }   
+
+        public void Display()
         {
             var prompt = 
                 "---------------\n"
@@ -19,18 +28,18 @@ namespace Flashcards
                 + "---------------";
 
             Console.WriteLine(prompt);
-            var userInput = UserInput.GetNumberInput(new int[]{ 1, 2, 3, 4 });
+            var userInput = _userInput.GetNumberInput(new int[]{ 1, 2, 3, 4 });
 
             switch(userInput)
             {
                 case 1:
-                    FlashcardManager.ManageStacks();
+                    _flashcardManager.ManageStacks();
                     break;
                 case 2:
-                    FlashcardManager.ManageCards();
+                    _flashcardManager.ManageCards();
                     break;
                 case 3:
-                    FlashcardManager.Study();
+                    _flashcardManager.Study();
                     break;
                 case 4:
                     Environment.Exit(0);
